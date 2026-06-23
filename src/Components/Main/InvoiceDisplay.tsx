@@ -43,35 +43,9 @@ export default function InvoiceDisplay({ invoice }: { invoice: any }) {
         setIsPrinting(false)
     };
 
-    const handleDownload = async () => {
-        const element = document.getElementById('invoice-content');
-        if (!element) return;
-
-        const canvas = await html2canvas(element);
-
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF();
-
-        const imgProps = pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save(`invoice-${invoice.invoiceId}.pdf`);
-    }
 
     if (!invoice) return <div className="p-4 text-center text-gray-500 dark:text-gray-400">No invoice data available</div>;
 
-
-    const deleteInvoice = async () => {
-        const { data } = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/Invoice/${invoice._id}/delete`, { withCredentials: true });
-        if (data.success) {
-            toast.success("Invoice deleted successfully");
-            router.back();
-        } else {
-            toast.error("Failed to delete invoice");
-        }
-    }
     return (
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {isPrinting && invoice && (
@@ -85,7 +59,8 @@ export default function InvoiceDisplay({ invoice }: { invoice: any }) {
 
                             <div className="flex justify-end my-4">
                                 <Button
-                                    onClick={handlePrintDocument}
+                                    // onClick={handlePrintDocument}
+                                    onClick={() => printInvoice(invoice)}
                                     variant={'secondary'}
                                     className="cursor-pointer w-full"
                                     onKeyDown={(e) => e.key == "Enter" ? { handlePrintDocument } : ""}
@@ -116,8 +91,7 @@ export default function InvoiceDisplay({ invoice }: { invoice: any }) {
 
 
                     <Button
-                        // onClick={handlePrint}
-                        onClick={() => printInvoice(invoice)}
+                        onClick={handlePrint}
                         disabled={isPrinting}
                         className="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800 text-white flex items-center gap-2 text-sm sm:text-base cursor-pointer"
                     >
