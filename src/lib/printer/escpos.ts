@@ -6,7 +6,7 @@ export async function printInvoice(invoice: any, Company: any) {
 
     await connectPrinter();
 
-    const printer = "Star SP700 TearBar (SP712)"; // change
+    const printer = "Star SP700 TearBar (SP712)";
 
     const config = qz.configs.create(printer);
 

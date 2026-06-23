@@ -40,6 +40,7 @@ import { Badge } from "../ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import ProductCardSkeleton from "../Skeleton/ProductCardCreateBill";
 import { cn } from "@/lib/utils";
+import { printInvoice } from "@/lib/printer/escpos";
 
 interface Product {
     name: string;
@@ -342,14 +343,7 @@ export default function BillingComponent({
 
     const handlePrintDocument = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        if (invoiceRef.current) {
-            const printContents = invoiceRef.current.innerHTML;
-            const originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-            window.location.reload();
-        }
+        printInvoice(invoice, Company)
     };
 
 

@@ -59,7 +59,8 @@ export function generateInvoice(invoice: any, companyFromRedux?: any) {
         }
 
         if (companyFromRedux?.phone) {
-            encoder.line(centerText(`TEL: ${companyFromRedux.phone}`));
+            encoder.line(centerText(`TEL: Georgetown:- +592 6750093`));
+            encoder.line(centerText(`TEL: Berbice:- +592 7593957`));
         }
         encoder.line("");
     }
@@ -96,8 +97,8 @@ export function generateInvoice(invoice: any, companyFromRedux?: any) {
             encoder.line(formatRow("", `QTY: ${product.quantity}`));
         } else {
             const currency = invoice.currency || "$";
-            const qtyXRate = `${product.quantity} x ${currency}${product.rate}`;
-            const totalAmount = `${currency}${product.amount}`;
+            const qtyXRate = `${product.quantity} x ${currency}${product.rate.toFixed(2)}`;
+            const totalAmount = `${currency}${product.amount.toFixed(2)}`;
             encoder.line(formatRow(qtyXRate, totalAmount));
         }
     });
@@ -152,11 +153,11 @@ export function generateInvoice(invoice: any, companyFromRedux?: any) {
     // --- 7. Footer ---
     if (invoice?.BillType !== "KOT") {
         encoder.line(centerText("SAVE OUR NUMBER FOR OFFERS & MENU UPDATES"));
-        encoder.bold(true).line(centerText("THANK YOU"));
-        encoder.bold(false).line(centerText("FOR YOUR BUSINESS!"));
+        encoder.bold(true).line(centerText("THANK YOU, FOR YOUR BUSINESS!"));
     }
 
     // Feed and cut execution
+    encoder.newline().newline().newline().newline();
     encoder.newline().newline().newline().newline();
     encoder.cut();
 

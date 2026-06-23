@@ -1,16 +1,11 @@
 'use client'
 import { useRef, useState } from "react";
 import { Button } from "../ui/button";
-import { Download, Printer, Share2, Mail, Trash2 } from "lucide-react";
+import { Printer } from "lucide-react";
 import { motion } from "framer-motion";
-import { IInvoice } from "@/Model/Invoice.model";
 import moment from "moment";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+
 import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 import PrintInvoiceFormate from "./PrintInvoiceFormate";
 import { printInvoice } from "@/lib/printer/escpos";
@@ -18,12 +13,10 @@ import { printInvoice } from "@/lib/printer/escpos";
 
 export default function InvoiceDisplay({ invoice }: { invoice: any }) {
     const { Company } = useSelector((state: any) => state.Company)
-    const { User } = useSelector((state: any) => state.User);
     const Branch = invoice?.branchId;
     const Address = Branch?.address.street + " " + Branch?.address.city + " " + Branch?.address.state
 
     const [isPrinting, setIsPrinting] = useState(false);
-    const router = useRouter();
     const handlePrint = () => {
         setIsPrinting(true)
     };
@@ -32,15 +25,6 @@ export default function InvoiceDisplay({ invoice }: { invoice: any }) {
     const handlePrintDocument = (event: React.MouseEvent) => {
         event.preventDefault();
         printInvoice(invoice, Company)
-        // if (invoiceRef.current) {
-        //     const printContents = invoiceRef.current.innerHTML;
-        //     const originalContents = document.body.innerHTML;
-        //     document.body.innerHTML = printContents;
-        //     window.print();
-        //     document.body.innerHTML = originalContents;
-        //     window.location.reload();
-        // }
-
         setIsPrinting(false)
     };
 
