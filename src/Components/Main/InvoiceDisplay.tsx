@@ -31,6 +31,7 @@ export default function InvoiceDisplay({ invoice }: { invoice: any }) {
 
     const handlePrintDocument = (event: React.MouseEvent) => {
         event.preventDefault();
+        printInvoice(invoice)
         // if (invoiceRef.current) {
         //     const printContents = invoiceRef.current.innerHTML;
         //     const originalContents = document.body.innerHTML;
@@ -59,8 +60,7 @@ export default function InvoiceDisplay({ invoice }: { invoice: any }) {
 
                             <div className="flex justify-end my-4">
                                 <Button
-                                    // onClick={handlePrintDocument}
-                                    onClick={() => printInvoice(invoice)}
+                                    onClick={handlePrintDocument}
                                     variant={'secondary'}
                                     className="cursor-pointer w-full"
                                     onKeyDown={(e) => e.key == "Enter" ? { handlePrintDocument } : ""}

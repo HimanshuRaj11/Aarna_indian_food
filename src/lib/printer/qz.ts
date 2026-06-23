@@ -1,8 +1,13 @@
 import qz from "qz-tray";
 
 export async function connectPrinter() {
-    if (!qz.websocket.isActive()) {
-        await qz.websocket.connect();
+    try {
+        if (!qz.websocket.isActive()) {
+            await qz.websocket.connect();
+            console.log("QZ Connected");
+        }
+    } catch (err) {
+        console.error("QZ Connection Error:", err);
     }
 }
 
