@@ -21,7 +21,7 @@ export default function PrintInvoiceFormate({ invoice }: { invoice: any }) {
     }
 
     return (
-        <div className={`print-area mx-auto p-2 text-black uppercase bg-white ${roboto.variable}`}>
+        <div className={`print-area p-1 text-black uppercase bg-white ${roboto.variable}`}>
             <div className="flex justify-end">
                 {invoice?.BillType == "KOT" ? (
                     <div className="flex flex-row">
@@ -68,7 +68,7 @@ export default function PrintInvoiceFormate({ invoice }: { invoice: any }) {
             </div>
 
             {/* Items Table */}
-            <table className="w-full text-sm mb-2">
+            <table className="w-full text-ssm mb-2">
                 <thead>
                     <tr className="border-b border-gray-400">
                         <th className="text-left py-1">Item</th>

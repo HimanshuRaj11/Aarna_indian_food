@@ -35,8 +35,8 @@ export async function POST(request: Request) {
         // const companyId = "6803e4c62a9cdbcaf5b3e6e4"
         const startDate = moment('2026-05-01').startOf('day').toDate();
         // const end = moment('2025-12-31').endOf('day').toDate();
-        // const branchName = "Georgetown"
-        const branchName = "Berbice"
+        const branchName = "Georgetown"
+        // const branchName = "Berbice"
         const invoiceFilter: any = {
             issueDate: { $gte: startDate },
             // branchId: branchId,
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
                 { status: 200 }
             );
         }
-        const sequenceStart = 3050;
+        const sequenceStart = 3838;
 
 
 

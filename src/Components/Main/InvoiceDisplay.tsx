@@ -13,6 +13,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 import PrintInvoiceFormate from "./PrintInvoiceFormate";
+import { printInvoice } from "@/lib/printer/escpos";
 
 
 export default function InvoiceDisplay({ invoice }: { invoice: any }) {
@@ -30,14 +31,15 @@ export default function InvoiceDisplay({ invoice }: { invoice: any }) {
 
     const handlePrintDocument = (event: React.MouseEvent) => {
         event.preventDefault();
-        if (invoiceRef.current) {
-            const printContents = invoiceRef.current.innerHTML;
-            const originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-            window.location.reload();
-        }
+        // if (invoiceRef.current) {
+        //     const printContents = invoiceRef.current.innerHTML;
+        //     const originalContents = document.body.innerHTML;
+        //     document.body.innerHTML = printContents;
+        //     window.print();
+        //     document.body.innerHTML = originalContents;
+        //     window.location.reload();
+        // }
+
         setIsPrinting(false)
     };
 
@@ -114,7 +116,8 @@ export default function InvoiceDisplay({ invoice }: { invoice: any }) {
 
 
                     <Button
-                        onClick={handlePrint}
+                        // onClick={handlePrint}
+                        onClick={() => printInvoice(invoice)}
                         disabled={isPrinting}
                         className="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800 text-white flex items-center gap-2 text-sm sm:text-base cursor-pointer"
                     >
