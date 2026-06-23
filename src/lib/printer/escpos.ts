@@ -2,7 +2,7 @@ import qz from "qz-tray";
 import { connectPrinter } from "./qz";
 import { generateInvoice } from "./invoice";
 
-export async function printInvoice(invoice: any) {
+export async function printInvoice(invoice: any, Company: any) {
 
     await connectPrinter();
 
@@ -10,7 +10,7 @@ export async function printInvoice(invoice: any) {
 
     const config = qz.configs.create(printer);
 
-    const data = generateInvoice(invoice);
+    const data = generateInvoice(invoice, Company);
 
     await qz.print(config, [
         {

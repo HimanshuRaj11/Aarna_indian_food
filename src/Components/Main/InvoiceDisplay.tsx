@@ -31,7 +31,7 @@ export default function InvoiceDisplay({ invoice }: { invoice: any }) {
 
     const handlePrintDocument = (event: React.MouseEvent) => {
         event.preventDefault();
-        printInvoice(invoice)
+        printInvoice(invoice, Company)
         // if (invoiceRef.current) {
         //     const printContents = invoiceRef.current.innerHTML;
         //     const originalContents = document.body.innerHTML;
