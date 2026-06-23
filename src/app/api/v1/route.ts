@@ -9,14 +9,21 @@ export async function GET() {
     try {
         await connectDB();
         const user_id = await verifyUser();
+        if (user_id instanceof NextResponse) {
+            return user_id;
+        }
 
-        const user = await UserModel.findById({ _id: user_id }).select("-password").populate({
+        const user = await UserModel.findById(user_id).select("-password").populate({
             path: 'branchId',
             model: branchModel
-        }).lean()
+        }).lean();
+        console.log(user);
+
         return NextResponse.json({ user, success: true }, { status: 200 })
 
     } catch (error) {
+        console.log(error + "kjhjkhjkhjkhjh");
+
         return NextResponse.json(InternalServerError(error as Error), { status: 503 });
     }
 }

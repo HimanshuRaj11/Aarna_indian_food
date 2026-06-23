@@ -12,6 +12,7 @@ export const verifyUser = async (): Promise<string | NextResponse> => {
     try {
         const cookiesObj = await cookies();
         const token = cookiesObj.get("FyBill_auth_token")?.value;
+
         if (!token) {
             return NextResponse.json({ message: "Token not found!" }, { status: 401 });
         }
@@ -21,6 +22,6 @@ export const verifyUser = async (): Promise<string | NextResponse> => {
         }
         return decodedToken._id;
     } catch (error) {
-        return NextResponse.json({ message: "Internal server error" });
+        return NextResponse.json({ message: "Internal server error" }, { status: 500 });
     }
 };

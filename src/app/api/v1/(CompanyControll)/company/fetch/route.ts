@@ -17,6 +17,8 @@ export async function GET(request: Request) {
             path: 'branch',
             model: BranchModel
         }).lean();
+        console.log(company);
+
 
         return NextResponse.json({ company });
 

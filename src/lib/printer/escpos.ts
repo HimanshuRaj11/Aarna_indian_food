@@ -16,7 +16,7 @@ export async function printInvoice(invoice: any) {
         {
             type: "raw",
             format: "command",
-            flavor: "plain",
+            flavor: "hex",
             data,
         },
     ]);
