@@ -11,6 +11,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Dialog, DialogContent, DialogTitle } from "@/Components/ui/dialog";
 import PrintInvoiceFormate from "@/Components/Main/PrintInvoiceFormate";
+import { printInvoice } from "@/lib/printer/escpos";
 
 
 export default function InvoiceDisplayPage({ invoice }: { invoice: any }) {
@@ -28,14 +29,15 @@ export default function InvoiceDisplayPage({ invoice }: { invoice: any }) {
 
     const handlePrintDocument = (event: React.MouseEvent) => {
         event.preventDefault();
-        if (invoiceRef.current) {
-            const printContents = invoiceRef.current.innerHTML;
-            const originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-            window.location.reload();
-        }
+        printInvoice(invoice, Company)
+        // if (invoiceRef.current) {
+        //     const printContents = invoiceRef.current.innerHTML;
+        //     const originalContents = document.body.innerHTML;
+        //     document.body.innerHTML = printContents;
+        //     window.print();
+        //     document.body.innerHTML = originalContents;
+        //     window.location.reload();
+        // }
         setIsPrinting(false)
     };
 

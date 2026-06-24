@@ -5,15 +5,18 @@ import HeldInvoices from '@/Components/Other/HeldInvoices';
 
 import { Button } from '@/Components/ui/button'
 import { Dialog, DialogContent, DialogTitle } from '@/Components/ui/dialog';
+import { printInvoice } from '@/lib/printer/escpos';
 import axios from 'axios';
 import { Receipt } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux';
 
 export default function Page() {
     const [HoldInvoices, setHoldInvoices] = useState<any>(null);
     const [HoldInvoiceUpdate, setHoldInvoiceUpdate] = useState<any>(null)
     const [invoice, setInvoice] = useState<any>(null);
     const [showInvoice, setShowInvoice] = useState(false);
+    const { Company } = useSelector((state: any) => state.Company)
 
 
 
@@ -75,14 +78,15 @@ export default function Page() {
 
     const handlePrintDocument = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        if (invoiceRef.current) {
-            const printContents = invoiceRef.current.innerHTML;
-            const originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-            window.location.reload();
-        }
+        printInvoice(invoice, Company)
+        // if (invoiceRef.current) {
+        //     const printContents = invoiceRef.current.innerHTML;
+        //     const originalContents = document.body.innerHTML;
+        //     document.body.innerHTML = printContents;
+        //     window.print();
+        //     document.body.innerHTML = originalContents;
+        //     window.location.reload();
+        // }
         // setIsPrinting(false);
     };
     useEffect(() => {
