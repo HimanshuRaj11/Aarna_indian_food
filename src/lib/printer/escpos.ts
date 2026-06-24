@@ -5,8 +5,9 @@ import { generateInvoice } from "./invoice";
 export async function printInvoice(invoice: any, Company: any) {
 
     await connectPrinter();
-    const branchPrinterName = Company?.branch?.printerName;
-    const printer = branchPrinterName;
+    const printer = Company?.branch?.find(
+        (b: any) => b._id.toString() === invoice.branchId._id.toString()
+    )?.printerName;
     console.log("Company Name:", Company);
     console.log("Printer Name:", printer);
 
