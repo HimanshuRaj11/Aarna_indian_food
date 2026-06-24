@@ -24,6 +24,7 @@ export interface IBranch extends Document {
     lastInvoiceCheck?: Date;
     active?: boolean;
     lastSequenceUpdate?: number;
+    printerName?: string;
 }
 
 
@@ -49,7 +50,7 @@ const BranchSchema: Schema = new Schema<IBranch>(
         dailyApprox: { type: Number, default: 0 },
         lastInvoiceCheck: { type: Date },
         active: { type: Boolean, default: true },
-        lastSequenceUpdate: { type: Number },
+        printerName: { type: String },
     },
     {
         timestamps: true,
