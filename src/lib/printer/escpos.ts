@@ -7,6 +7,7 @@ export async function printInvoice(invoice: any, Company: any) {
     await connectPrinter();
     const branchPrinterName = Company?.branch?.printerName;
     const printer = branchPrinterName;
+    console.log("Company Name:", Company);
     console.log("Printer Name:", printer);
 
     const config = qz.configs.create(printer);
