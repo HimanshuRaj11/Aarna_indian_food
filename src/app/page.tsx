@@ -159,3 +159,35 @@ const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, titl
     <p className="text-gray-600 leading-relaxed">{description}</p>
   </motion.div>
 )
+
+// "use client";
+
+import qz from "qz-tray";
+
+export function Test() {
+  async function connect() {
+    try {
+      qz.security.setCertificatePromise(async () => {
+        return await fetch("/api/qz/certificate").then(r => r.text());
+      });
+
+      qz.security.setSignaturePromise(async (toSign) => {
+        return await fetch("/api/qz/sign", {
+          method: "POST",
+          body: JSON.stringify({ request: toSign }),
+        }).then(r => r.text());
+      });
+      await qz.websocket.connect();
+
+      console.log("Connected!");
+
+      const printers = await qz.printers.find();
+
+      console.log(printers);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  return <button onClick={connect}>Connect</button>;
+}
