@@ -82,13 +82,7 @@ export default function InvoiceDisplay({ invoice }: { invoice: any }) {
                         <Printer className="h-4 w-4" />
                         <span>Print</span>
                     </Button>
-                    {/* <Button
-                        onClick={handleDownload}
-                        className="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800 text-white flex items-center gap-2 text-sm sm:text-base cursor-pointer"
-                    >
-                        <Download className="h-4 w-4" />
-                        <span>Download</span>
-                    </Button> */}
+
                 </div>
             </div>
 
