@@ -8,9 +8,6 @@ export async function printInvoice(invoice: any, Company: any) {
     const printer = Company?.branch?.find(
         (b: any) => b._id.toString() === invoice.branchId._id.toString()
     )?.printerName;
-    console.log("Company Name:", Company);
-    console.log("Printer Name:", printer);
-
     const config = qz.configs.create(printer);
 
     const data = generateInvoice(invoice, Company);
