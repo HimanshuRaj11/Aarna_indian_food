@@ -7,7 +7,7 @@ export async function GET() {
         const certPath = path.join(
             process.cwd(),
             "certificates",
-            "public-key.pem"
+            "public-cert.pem"
         );
 
         const certificate = await fs.readFile(certPath, "utf8");
