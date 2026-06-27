@@ -3,11 +3,11 @@ import { connectPrinter } from "./qz";
 import { generateInvoice } from "./invoice";
 
 export async function printInvoice(invoice: any, Company: any) {
-    console.log(Company?.branch);
-    console.log(invoice);
+    console.log(Company?.branch._id);
+    console.log(invoice.branchId);
     await connectPrinter();
     const printer = Company?.branch?.find(
-        (b: any) => b._id.toString() === invoice.branchId._id.toString()
+        (b: any) => b._id.toString() === invoice.branchId.toString()
     )?.printerName;
     const config = qz.configs.create(printer);
 
