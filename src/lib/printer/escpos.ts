@@ -3,7 +3,8 @@ import { connectPrinter } from "./qz";
 import { generateInvoice } from "./invoice";
 
 export async function printInvoice(invoice: any, Company: any) {
-
+    console.log(Company?.branch);
+    console.log(invoice);
     await connectPrinter();
     const printer = Company?.branch?.find(
         (b: any) => b._id.toString() === invoice.branchId._id.toString()
