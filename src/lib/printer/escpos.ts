@@ -12,6 +12,11 @@ export async function printInvoice(invoice: any, Company: any) {
 
     const data = generateInvoice(invoice, Company);
 
+
+    console.log(Company?.branch);
+    console.log(invoice);
+    console.log(printer);
+
     await qz.print(config, [
         {
             type: "raw",
