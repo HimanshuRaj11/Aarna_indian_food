@@ -1,29 +1,29 @@
 import qz from "qz-tray";
 
-let configured = false;
+// let configured = false;
 
-function configureQZ() {
-    if (configured) return;
+// function configureQZ() {
+//     if (configured) return;
 
-    configured = true;
+//     configured = true;
 
-    qz.security.setCertificatePromise(() =>
-        fetch("/api/qz/certificate").then((r) => r.text())
-    );
+//     qz.security.setCertificatePromise(() =>
+//         fetch("/api/qz/certificate").then((r) => r.text())
+//     );
 
-    qz.security.setSignaturePromise((toSign) =>
-        fetch("/api/qz/sign", {
-            method: "POST",
-            headers: {
-                "Content-Type": "text/plain",
-            },
-            body: toSign,
-        }).then((r) => r.text())
-    );
-}
+//     qz.security.setSignaturePromise((toSign) =>
+//         fetch("/api/qz/sign", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "text/plain",
+//             },
+//             body: toSign,
+//         }).then((r) => r.text())
+//     );
+// }
 export async function connectPrinter() {
     try {
-        configureQZ();
+        // configureQZ();
         if (!qz.websocket.isActive()) {
 
             await qz.websocket.connect();
