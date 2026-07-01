@@ -15,16 +15,13 @@ export async function POST(request: Request) {
     try {
 
         // const { startDate, endDate, branchId } = await request.json();
+        const { branchName, sequenceStart } = await request.json();
 
         // const user_id = await verifyUser();
         // if (!user_id) return NextResponse.json({ message: "Unauthorized", success: false }, { status: 401 });
 
         // const User = await UserModel.findById(user_id);
         // if (!User) return NextResponse.json({ message: "User not found", success: false }, { status: 404 });
-
-        // const companyId = User.companyId;
-        // const company = await CompanyModel.findById(companyId);
-        // if (!company) return NextResponse.json({ message: "Company not found", success: false }, { status: 404 });
 
 
         // Set delete: false on all invoices
@@ -35,7 +32,7 @@ export async function POST(request: Request) {
         // const companyId = "6803e4c62a9cdbcaf5b3e6e4"
         const startDate = moment('2026-05-01').startOf('day').toDate();
         // const end = moment('2025-12-31').endOf('day').toDate();
-        const branchName = "Georgetown"
+        // const branchName = "Georgetown"
         // const branchName = "Berbice"
         const invoiceFilter: any = {
             issueDate: { $gte: startDate },
@@ -66,7 +63,7 @@ export async function POST(request: Request) {
                 { status: 200 }
             );
         }
-        const sequenceStart = 3838;
+        // const sequenceStart = 3838; // 3765
 
 
 
